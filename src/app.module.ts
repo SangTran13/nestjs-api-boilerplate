@@ -1,24 +1,28 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { HelloModule } from './hello/hello.module';
-import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
 import { PostsModule } from './posts/posts.module';
-import Joi, * as joi from 'joi';
-import appConfig from './config/app.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Post } from './posts/entities/post.entity';
+import { ConfigModule } from '@nestjs/config';
 
 // root module -> use all other modules
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true, // make env available globally
-      // validationSchema: joi.object({
-      //   APP_NAME: Joi.string().default('NestJS Application'),
-      // }),
-      load: [appConfig],
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: (process.env.DB_TYPE as any),
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [Post],
+      autoLoadEntities: true,
+      synchronize: true,
     }),
-    HelloModule, UserModule, PostsModule],
+    PostsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
