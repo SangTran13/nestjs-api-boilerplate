@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from "src/auth/entities/user.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity()
@@ -12,8 +13,8 @@ export class Post {
     @Column({ type: 'text' })
     content: string;
 
-    @Column({ type: 'varchar', length: 25 })
-    authorName: string;
+    @ManyToOne(() => User, user => user.posts)
+    authorName: User;
 
     @CreateDateColumn()
     createdAt: Date;

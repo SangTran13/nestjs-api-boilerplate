@@ -14,11 +14,4 @@ export class UpdatePostDto {
     @IsString({ message: 'Content must be a string' })
     @MinLength(5, { message: 'Content must be at least 5 characters long' })
     content?: string;
-
-    @IsOptional()
-    @IsNotEmpty({ message: 'Author should not be empty' })
-    @IsString({ message: 'Author must be a string' })
-    @MinLength(2, { message: 'Author must be at least 2 characters long' })
-    @MaxLength(25, { message: 'Author must be at most 25 characters long' })
-    authorName?: string;
 }
