@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { User } from "src/auth/entities/user.entity";
 
-
 export interface UserRegisteredEvent {
     user: {
         id: number;

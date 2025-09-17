@@ -44,5 +44,4 @@ export class FileUploadController {
         }
         return uploadedFile;
     }
-
 }

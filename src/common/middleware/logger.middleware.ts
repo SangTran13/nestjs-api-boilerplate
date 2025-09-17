@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware, Logger } from "@nestjs/common";
 import { NextFunction, Request, Response } from "express";
 
-
+// LoggerMiddleware to log HTTP requests and responses
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
     private readonly logger = new Logger('HTTP');

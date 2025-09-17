@@ -2,8 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import * as userEventsService from "../user-events.service";
 
-
-
+// Listener for handling user registration events
 @Injectable()
 export class UserRegisteredListener {
 

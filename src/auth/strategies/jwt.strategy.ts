@@ -3,7 +3,7 @@ import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { AuthService } from "../auth.service";
 
-
+// JWT Strategy for validating JWT tokens in incoming requests
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) {

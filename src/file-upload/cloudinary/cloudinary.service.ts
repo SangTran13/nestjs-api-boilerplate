@@ -2,7 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
 import * as streamifier from 'streamifier';
 
-
+// Service to handle file uploads and deletions using Cloudinary
 @Injectable()
 export class CloudinaryService {
     constructor(

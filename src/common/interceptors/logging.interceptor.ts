@@ -2,8 +2,7 @@ import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } fr
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
-
-
+// LoggingInterceptor to log details of incoming requests and outgoing responses
 @Injectable()
 
 export class LoggingInterceptor implements NestInterceptor {

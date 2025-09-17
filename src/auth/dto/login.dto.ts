@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 
-
+// Data Transfer Object for user login
 export class LoginDto {
     @IsEmail({}, { message: 'Invalid email format' })
     email: string;

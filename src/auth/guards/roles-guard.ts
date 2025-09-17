@@ -3,8 +3,7 @@ import { Reflector } from "@nestjs/core";
 import { UserRole } from "../entities/user.entity";
 import { ROLES_KEY } from "../decorators/roles.decorators";
 
-
-
+// RolesGuard to enforce role-based access control on route handlers
 @Injectable()
 export class RolesGuard implements CanActivate {
     // Inject Reflector to access metadata set by the Roles decorator

@@ -20,4 +20,5 @@ import { File } from './entities/file.entity';
   controllers: [FileUploadController],
   providers: [FileUploadService]
 })
+
 export class FileUploadModule { }

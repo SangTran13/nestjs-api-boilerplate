@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { ThrottlerException, ThrottlerGuard } from "@nestjs/throttler";
 
-
+// Custom Throttler Guard for login attempts
+// Limits the number of login attempts to prevent brute-force attacks
 @Injectable()
 export class LoginThrottlerGuard extends ThrottlerGuard {
 

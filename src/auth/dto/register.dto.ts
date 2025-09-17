@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 
-
+// Data Transfer Object for user registration
 export class RegisterDto {
     @IsEmail({}, { message: 'Invalid email format' })
     email: string;
@@ -17,5 +17,4 @@ export class RegisterDto {
 
     @IsNotEmpty({ message: 'Please confirm your password' })
     confirmPassword: string;
-
 }

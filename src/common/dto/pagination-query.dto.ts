@@ -1,8 +1,7 @@
 import { Type } from "class-transformer";
 import { IsInt, IsOptional, Max, Min } from "class-validator";
 
-
-
+// Data Transfer Object for pagination queries
 export class PaginationQueryDto {
     @IsOptional()
     @Type(() => Number)

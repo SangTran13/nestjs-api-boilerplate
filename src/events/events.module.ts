@@ -21,4 +21,5 @@ import { UserRegisteredListener } from './listeners/user-registered.listerner';
         UserEventsService,
     ],
 })
+
 export class EventsModule { }

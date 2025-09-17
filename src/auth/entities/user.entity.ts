@@ -1,12 +1,13 @@
 import { Post } from "src/posts/entities/post.entity";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-
+// Enum for user roles
 export enum UserRole {
     USER = 'user',
     ADMIN = 'admin',
 }
 
+// User entity representing the user table in the database
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -39,5 +40,4 @@ export class User {
 
     @Column({ default: true })
     isActive: boolean;
-
 }
