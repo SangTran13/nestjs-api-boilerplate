@@ -1,9 +1,8 @@
 {
-  "name": "nestjs-api-boilerplate",
+  "name": "@sangtran13/nestjs-api-boilerplate",
   "version": "0.0.1",
   "description": "",
   "author": "",
-  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
