@@ -1,63 +1,189 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NestJS API Boilerplate
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A robust, scalable boilerplate for building RESTful APIs with [NestJS](https://nestjs.com), TypeORM, JWT authentication, Cloudinary file uploads, and more.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **User Authentication** (JWT, refresh token)
+- **Role-based Authorization**
+- **Post CRUD** with caching
+- **File Uploads** (Cloudinary integration)
+- **Throttling & Rate Limiting**
+- **Event System** (NestJS Events)
+- **Caching** (in-memory)
+- **Environment Configuration** via `.env`
+- **DTO & Validation**
+- **Logging & Middleware**
+- **Extensible Module Structure**
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
 
 ```bash
-$ npm install
+git clone https://github.com/your-username/nestjs-api-boilerplate.git
+cd nestjs-api-boilerplate
 ```
 
-## Compile and run the project
+### 2. Install dependencies
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+### 3. Configure environment variables
+
+Copy `.env.example` to `.env` and fill in your values:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
 ```
 
-## Deployment
+Edit `.env` (see `.env.example` for all available keys):
+
+```env
+APP_NAME=nestjs-api
+PORT=3000
+
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=yourpassword
+DB_NAME=nestjs_db
+
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=3600s
+JWT_REFRESH_SECRET=your_refresh_secret
+JWT_REFRESH_EXPIRES_IN=7d
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+### 4. Run the application
+
+```bash
+npm run start:dev
+```
+
+---
+
+## Project Structure
+
+```
+src/
+│
+├── auth/                # Authentication & user management
+│   ├── entities/
+│   ├── guards/
+│   ├── pipes/
+│   ├── auth.controller.ts
+│   ├── auth.service.ts
+│   ├── token.service.ts
+│   └── ...
+│
+├── posts/               # Post CRUD & caching
+│   ├── entities/
+│   ├── posts.controller.ts
+│   ├── posts.service.ts
+│   └── ...
+│
+├── file-upload/         # File upload & Cloudinary integration
+│   ├── cloudinary/
+│   ├── entities/
+│   ├── file-upload.controller.ts
+│   ├── file-upload.service.ts
+│   └── ...
+│
+├── events/              # Event listeners
+│   ├── listeners/
+│   └── ...
+│
+├── common/              # Middleware, decorators, utils
+│
+├── app.module.ts
+├── app.controller.ts
+├── app.service.ts
+└── main.ts
+```
+
+---
+
+## Main Modules
+
+- **Auth:** Register, login, JWT, refresh token, profile, logout, guards, roles.
+- **Posts:** CRUD, caching, DTO, validation, pagination.
+- **File Upload:** Upload files to Cloudinary, delete files, store metadata.
+- **Events:** Listen for user registration and other events.
+- **Throttling:** Rate limit login attempts.
+- **Caching:** In-memory cache for posts and queries.
+
+---
+
+## Usage
+
+### Authentication
+
+- `POST /auth/register` — Register new user
+- `POST /auth/login` — Login and get JWT tokens
+- `POST /auth/refresh-token` — Refresh JWT token
+- `GET /auth/profile` — Get current user profile (JWT required)
+- `POST /auth/logout` — Logout user (invalidate refresh token)
+
+### Posts
+
+- `GET /posts` — List posts (supports pagination, caching)
+- `GET /posts/:id` — Get post by ID
+- `POST /posts` — Create post (JWT required)
+- `PUT /posts/:id` — Update post (JWT required)
+- `DELETE /posts/:id` — Delete post (Admin only)
+
+### File Upload
+
+- `POST /file-upload` — Upload file (JWT required)
+- `GET /file-upload` — List uploaded files
+- `DELETE /file-upload/:id` — Delete file (Admin only)
+
+---
+
+## Cloudinary Integration
+
+- Configure your Cloudinary credentials in `.env`.
+- Uploaded files are stored in your Cloudinary account.
+
+---
+
+## Development
+
+- **Hot reload:** `npm run start:dev`
+- **Lint:** `npm run lint`
+- **Build:** `npm run build`
+- **Test:** `npm run test`
+
+---
+
+## Environment Variables
+
+See `.env.example` for all available configuration options.
+
+---
+
+## License
+
+MIT
+
+---
+
+## Author
+
+Built by STN.
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 

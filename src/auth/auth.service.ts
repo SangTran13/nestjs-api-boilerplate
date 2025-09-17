@@ -6,6 +6,7 @@ import { User, UserRole } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UserEventsService } from 'src/events/user-events.service';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
         @InjectRepository(User)
         private usersRepository: Repository<User>,
         private jwtService: JwtService,
+        private readonly userEventService: UserEventsService,
     ) { }
 
     async register(registerDto: RegisterDto) {
@@ -67,6 +69,9 @@ export class AuthService {
             role: UserRole.ADMIN,
         });
         await this.usersRepository.save(newUser);
+
+        this.userEventService.emitUserRegistered(newUser);
+
         const { password, ...result } = newUser; // Exclude password from the returned user object
 
         return {

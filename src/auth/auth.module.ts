@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { RolesGuard } from './guards/roles-guard';
+import { EventsModule } from 'src/events/events.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { RolesGuard } from './guards/roles-guard';
     PassportModule,
 
     // configure JwtModule in AuthModule
-    JwtModule.register({})
+    JwtModule.register({}),
+    EventsModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, RolesGuard],

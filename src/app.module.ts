@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
@@ -9,6 +9,10 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/user.entity';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { File } from './file-upload/entities/file.entity';
+import { EventsModule } from './events/events.module';
+import { LoggerMiddleware } from './common/middleware/logger.middleware';
 
 // root module -> use all other modules
 @Module({
@@ -33,14 +37,22 @@ import { CacheModule } from '@nestjs/cache-manager';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Post, User],
+      entities: [Post, User, File],
       autoLoadEntities: true,
       synchronize: true,
     }),
     PostsModule,
     AuthModule,
+    FileUploadModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes('*');
+  }
+}
